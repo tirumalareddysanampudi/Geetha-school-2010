@@ -24,7 +24,7 @@ agent any
     sh "mvn test"
   }
  }
-  stage('TRIVY FS SCAN' Filesystem Scan '){
+  stage('TRIVY FS SCAN Filesystem Scan '){
   steps{
     sh "trivy fs --formate table -o trivy-fsreport.html"
   }
