@@ -31,7 +31,7 @@ agent any
  }
   stage('SonarQube Analysis'){
   steps{
-    withSonarQubeEnv(credentialsId: 'sonar-credential-token') {
+    withSonarQubeEnv('sonar-server') {
      sh """ $SCANNER_HOME/bin/Sonar-Scanner -Dsonar.projectName=GeethaGurukulam -Dsonar.projectKey=GeethaKey -Dsonar.java.binaries='.'"""
 }
   }
