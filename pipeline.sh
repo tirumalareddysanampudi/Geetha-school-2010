@@ -4,7 +4,7 @@ agent any
  
  }
  environment{
- 
+   SCANNER_HOME=tool 'Sonar-Scanner'
  }
  stages{
  stage(' Clean Workspace'){
@@ -14,72 +14,31 @@ agent any
  }
   stage('Git Checkout your Code'){
   steps{
-    //shell 
+    git branch: 'main', changelog: false, credentialsId: 'Git-Hub', poll: false, url: 'https://github.com/tirumalareddysanampudi/Geetha-school-2010.git'
   }
  }
   stage('mvn Compile'){
   steps{
-    //shell 
+    sh "mvn compile"
   }
  }
   stage('mvn Test'){
   steps{
-    //shell 
+    sh "mvn test"
   }
  }
-  stage('mvn Filesystem Scan '){
+  stage('TRIVY FS SCAN' Filesystem Scan '){
   steps{
-    //shell 
+    sh "trivy fs --formate table -o trivy-fsreport.html"
   }
  }
   stage('SonarQube Analysis'){
   steps{
-    //shell 
-  }
- }
-  stage('Quality-Gate'){
-  steps{
-    //shell 
-  }
- }
-  stage('mvn Build'){
-  steps{
-    //shell 
-  }
- }
-  stage('Publish To Nexus'){
-  steps{
-    //shell 
-  }
- }
-  stage('Build & Tag Docker Images'){
-  steps{
-    //shell 
-  }
- }
-  stage('Docker Image Scan'){
-  steps{
-    //shell 
-  }
- }
-  stage('Push Docker Image'){
-  steps{
-    //shell 
-  }
- }
-  stage('Deploy To Kubernetes'){
-  steps{
-    //shell 
-  }
- }
-  stage('Verify the Deployment'){
-  steps{
-    //shell 
-  }
- }
-
-post {
-
+    withSonarQubeEnv(credentialsId: 'sonar-credential-token') {
+     sh """ $SCANNER_HOME/bin/Sonar-Scanner -Dsonar.projectName=GeethaGurukulam -Dsonar.projectKey=GeethaKey \ -Dsonar.java.binaries='.'"""
 }
+  }
+ }
+  
  }
 }
