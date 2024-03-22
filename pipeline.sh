@@ -31,9 +31,9 @@ agent any
  }
   stage('SonarQube Analysis'){
   steps{
-    withSonarQubeEnv('sonar-server') {
-     sh """ $SCANNER_HOME/bin/Sonar-Scanner -Dsonar.projectName=GeethaGurukulam -Dsonar.projectKey=GeethaKey -Dsonar.java.binaries='.'"""
-}
+   withSonarQubeEnv('sonar-server') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=GeethaGurukulam \
+                    -Dsonar.projectKey=Jenkins '''
   }
  }
   
