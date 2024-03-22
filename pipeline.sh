@@ -29,14 +29,5 @@ agent any
     sh "trivy fs /root/.jenkins/workspace/School-pipeline -o trivy-fsreport.html"
   }
  }
-  stage('SonarQube Analysis'){
-  steps{
-   withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=GeethaGurukulam \
-                    -Dsonar.projectKey=Jenkins '''
-  }
- }
-  
- }
 }
 }
