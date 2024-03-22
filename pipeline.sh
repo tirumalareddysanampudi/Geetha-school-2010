@@ -1,8 +1,8 @@
 pipeline{
 agent any 
- tools{
- 
- }
+ # tools{
+ #  mvn "
+ # }
  environment{
    SCANNER_HOME=tool 'Sonar-Scanner'
  }
