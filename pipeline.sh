@@ -26,7 +26,7 @@ agent any
  }
   stage('TRIVY FS SCAN Filesystem Scan '){
   steps{
-    sh "trivy fs --formate table -o trivy-fsreport.html"
+    sh "trivy fs /root/.jenkins/workspace/ -o trivy-fsreport.html"
   }
  }
   stage('SonarQube Analysis'){
